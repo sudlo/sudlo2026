@@ -3,208 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudlo Matrix Core | DevOps Roadmaps</title>
+    <title>Sudlo2026 | The Matrix Cloud & DevOps Core</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #030a03; color: #00ff66; font-family: 'JetBrains Mono', monospace; padding: 40px 20px; line-height: 1.6; }
-        .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-        
-        /* Background Rain */
-        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.15; pointer-events: none; }
-        
-        header { border-bottom: 1px solid #003311; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .title-block h1 { font-size: 28px; text-shadow: 0 0 10px rgba(0,255,102,0.4); margin-bottom: 5px; }
-        .title-block p { color: #00aa44; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        header a { color: #008833; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s; }
-        header a:hover { color: #00ff66; }
 
-        /* Search */
-        .search-area { background: rgba(1, 8, 2, 0.8); border: 1px solid #005522; padding: 20px; border-radius: 6px; margin-bottom: 40px; box-shadow: 0 0 15px rgba(0,255,102,0.05); }
-        .search-box { width: 100%; background: #021205; border: 1px solid #007733; color: #00ff66; padding: 15px; font-family: inherit; font-size: 15px; outline: none; border-radius: 4px; transition: 0.2s; }
-        .search-box:focus { border-color: #00ff66; box-shadow: 0 0 10px rgba(0,255,102,0.2); }
-        .search-stats { font-size: 11px; color: #006622; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        body {
+            background-color: #030a03;
+            color: #00ff66;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            font-size: 14px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #matrixCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.15; pointer-events: none;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+
+        .container {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 0; border-bottom: 1px solid #003311;
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; text-shadow: 0 0 8px rgba(0,255,102,0.6); }
+        .logo-icon { color: #00ff66; font-size: 18px; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo-subtitle { font-size: 10px; color: #008833; text-transform: uppercase; letter-spacing: 1px; }
+
+        .nav-links { display: flex; gap: 30px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00aa44; align-items: center; }
+        .nav-links a:hover { color: #00ff66; text-shadow: 0 0 8px rgba(0,255,102,0.8); }
+
+        .backend-indicator {
+            display: flex; align-items: center; gap: 6px; font-size: 10px; border: 1px solid #003311; padding: 4px 10px; border-radius: 3px;
+        }
+        .backend-dot { height: 7px; width: 7px; border-radius: 50%; background-color: #00ff66; box-shadow: 0 0 6px #00ff66; }
+
+        .hero { padding: 60px 0 30px 0; }
+        .hero-status { display: flex; align-items: center; gap: 10px; color: #00ff66; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;}
+        .status-dot { height: 8px; width: 8px; background-color: #00ff66; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #00ff66; }
+
+        .hero-title {
+            font-size: 44px; font-weight: 700; line-height: 1.1; margin-bottom: 20px; max-width: 800px; text-shadow: 0 0 10px rgba(0,255,102,0.4);
+        }
+        .title-highlight { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+
+        .hero-description { font-size: 15px; color: #00aa44; max-width: 700px; margin-bottom: 30px; }
+
+        /* Search Console */
+        .search-console {
+            background-color: rgba(0, 15, 5, 0.9); border: 1px solid #005522; padding: 24px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 0 20px rgba(0,255,102,0.1);
+        }
+        .search-input-wrapper {
+            display: flex; align-items: center; background-color: #010802; border: 1px solid #007733; border-radius: 6px; padding: 10px 18px; gap: 12px;
+        }
+        .search-input-wrapper:focus-within { border-color: #00ff66; box-shadow: 0 0 12px rgba(0,255,102,0.3); }
+        .ai-prompt-symbol { color: #00ff66; font-weight: bold; font-size: 16px; text-shadow: 0 0 6px #00ff66; }
+        .search-box {
+            background: transparent; border: none; color: #00ff66; font-family: 'JetBrains Mono', monospace; font-size: 15px; width: 100%; outline: none;
+        }
+        .search-btn {
+            background-color: #003311; border: 1px solid #00ff66; color: #00ff66; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: bold; white-space: nowrap;
+        }
+        .search-btn:hover:not(:disabled) { background-color: #00ff66; color: #030a03; text-shadow: none; box-shadow: 0 0 10px #00ff66; }
+        .search-btn:disabled { opacity: 0.5; cursor: wait; }
+
+        .search-hints { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
+        .hint-pill {
+            background-color: #021a08; border: 1px solid #004416; color: #00cc52; font-size: 11px; padding: 5px 12px; border-radius: 4px; cursor: pointer;
+        }
+        .hint-pill:hover { border-color: #00ff66; color: #fff; background-color: #003311; }
+
+        .search-mode-note { font-size: 10px; color: #005522; margin-top: 10px; }
+
+        /* AI Results Panel */
+        #ai-search-results {
+            display: none; background-color: rgba(2, 18, 6, 0.95); border: 1px solid #00ff66; padding: 24px; border-radius: 8px; margin-bottom: 40px; box-shadow: 0 0 25px rgba(0,255,102,0.2);
+        }
+        .ai-results-header { color: #00ff66; font-weight: bold; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; text-shadow: 0 0 6px #00ff66; }
+        .ai-results-content { color: #b3ffcc; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; }
+        .ai-results-content ol { margin-left: 20px; margin-top: 10px; }
+        .ai-results-content li { margin-bottom: 6px; }
+        .ai-results-content code { background: #00220a; color: #00ff66; padding: 2px 6px; border-radius: 3px; font-size: 12px; border: 1px solid #005522; }
+        .typing-cursor::after { content: '▊'; animation: blink 1s step-start infinite; color: #00ff66; }
+        @keyframes blink { 50% { opacity: 0; } }
 
         /* Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; background: #003311; border: 1px solid #003311; }
-        .card { background: #030d05; padding: 25px; transition: all 0.2s; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; }
-        .card:hover { background: #061a0b; border-left: 4px solid #00ff66; }
-        .card-meta { font-size: 10px; color: #008833; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; justify-content: space-between; }
-        .card-title { font-size: 22px; color: #fff; margin-bottom: 10px; font-weight: 700; }
-        .card-desc { font-size: 13px; color: #00aa44; margin-bottom: 20px; }
-        .card-action { font-size: 11px; color: #00ff66; background: #00220a; border: 1px solid #005522; padding: 4px 8px; border-radius: 3px; display: inline-block; align-self: flex-start; }
+        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 12px; color: #008833; text-transform: uppercase; letter-spacing: 1px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; background-color: #003311; border: 1px solid #003311; margin-bottom: 60px; }
+        .card { background-color: #030d05; padding: 30px; position: relative; transition: all 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+        .card { border-left: 3px solid transparent; }
+        .card:hover, .card:focus { background-color: #061a0b; border-left: 3px solid #00ff66; outline: none; }
+        .card.ai-highlighted { border-left: 3px solid #00ff66; background-color: #061f0c; box-shadow: inset 0 0 20px rgba(0,255,102,0.15); }
+        .card-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px; }
+        .internal-link { color: #006622; font-size: 12px; }
+        .card:hover .internal-link { color: #00ff66; }
+        .card-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #008833; margin-bottom: 8px; }
+        .card-title { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+        .card-description { font-size: 13px; color: #00aa44; }
+        .tutorial-badge { font-size: 10px; background: #00220a; color: #00ff66; border: 1px solid #005522; padding: 2px 8px; border-radius: 3px; margin-top: 15px; display: inline-block; }
 
-        /* Modal / Roadmap Hub */
-        #roadmapModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 5, 2, 0.95); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-content { background: #020d04; border: 1px solid #00ff66; max-width: 600px; width: 100%; border-radius: 6px; padding: 30px; box-shadow: 0 0 40px rgba(0, 255, 102, 0.2); }
+        /* Modal */
+        #tutorialModal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 5, 2, 0.9); z-index: 1000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background: #020d04; border: 1px solid #00ff66; max-width: 700px; width: 100%; border-radius: 8px; padding: 30px; box-shadow: 0 0 35px rgba(0, 255, 102, 0.3); max-height: 85vh; overflow-y: auto;
+        }
         .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #004416; padding-bottom: 15px; margin-bottom: 20px; }
         .modal-title { color: #00ff66; font-size: 20px; font-weight: bold; }
-        .close-btn { background: none; border: none; color: #008833; font-size: 24px; cursor: pointer; font-family: monospace; }
+        .close-btn { background: none; border: none; color: #008833; font-size: 18px; cursor: pointer; font-family: monospace; }
         .close-btn:hover { color: #00ff66; }
-        
-        /* Clickable Links inside Modal */
-        .roadmap-links-container { display: flex; flex-direction: column; gap: 10px; }
-        .hub-link { 
-            display: block; background: #011205; border: 1px solid #004416; color: #b3ffcc; padding: 15px; text-decoration: none; font-size: 14px; border-radius: 4px; transition: all 0.2s;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .hub-link:hover { background: #00220a; border-color: #00ff66; color: #fff; box-shadow: 0 0 10px rgba(0,255,102,0.2); padding-left: 20px; }
-        .hub-link span { color: #00ff66; font-size: 16px; }
+        .tutorial-steps ol { margin-left: 20px; color: #b3ffcc; }
+        .tutorial-steps li { margin-bottom: 12px; font-size: 13px; }
+        .tutorial-steps code { background: #00220a; color: #00ff66; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
 
+        footer { text-align: center; padding: 40px 0; font-size: 12px; color: #006622; border-top: 1px solid #003311; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: #00ff66; color: #030a03; padding: 8px 16px; font-weight: bold; font-size: 12px; z-index: 100; transition: top 0.2s; }
+        .skip-link:focus { top: 0; }
     </style>
+<base target="_blank">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
 
     <canvas id="matrixCanvas"></canvas>
 
     <div class="container">
         <header>
-            <div class="title-block">
-                <h1>Sudlo.Matrix</h1>
-                <p>Neural Cloud & DevOps Roadmaps</p>
-            </div>
-            <a href="https://dev.to/sudlo2014" target="_blank">Dev.to Blog ↗</a>
+            <a href="#" class="logo">
+                <span class="logo-icon">>_</span>
+                <span class="logo-text">Sudlo2026.Matrix<span class="logo-subtitle">Neural Cloud Grid</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="https://dev.to/sudlo2014" target="_blank">Dev.to Blog ↗</a>
+                <a href="#stacks">Nodes</a>
+                <div class="backend-indicator" title="Local matrix intelligence engine — no API key, no external calls">
+                    <span class="backend-dot"></span>
+                    <span>ENGINE ONLINE</span>
+                </div>
+            </nav>
         </header>
 
-        <div class="search-area">
-            <input type="text" id="matrixSearch" class="search-box" placeholder="Scan construct: postgres, redis, aws, azure, devops..." oninput="runGridSearch()">
-            <div class="search-stats" id="matchLabel">8 Modules Active</div>
-        </div>
+        <main id="main-content">
+        <section class="hero">
+            <div class="hero-status"><span class="status-dot"></span> MATRIX CONSTRUCT ONLINE</div>
+            <h1 class="hero-title">Query databases, clouds & DevOps. <span class="title-highlight">Access source.</span></h1>
+            <p class="hero-description">Ask a real question in plain English, or click a shortcut below. The matrix parses intent, expands synonyms, and tolerates typos — entirely in your browser, no API key or server required.</p>
 
-        <div class="grid">
-            
-            <div class="card" data-tags="postgresql database sql tuning replication" onclick="openHub('PostgreSQL Mastery', [
-                { text: 'PostgreSQL Official Tutorial', url: 'https://www.postgresql.org/docs/current/tutorial.html' },
-                { text: 'DBA Roadmap (roadmap.sh)', url: 'https://roadmap.sh/postgresql-dba' },
-                { text: 'pgBouncer Connection Pooling Guide', url: 'https://www.pgbouncer.org/usage.html' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>Database</span><span>[ DB ]</span></div>
-                    <div class="card-title">PostgreSQL</div>
-                    <div class="card-desc">Connection pooling, EXPLAIN ANALYZE tuning, and high-availability replication setups.</div>
+            <div class="search-console" id="search">
+                <div class="search-input-wrapper">
+                    <span class="ai-prompt-symbol">⚡</span>
+                    <input type="text" id="searchInput" class="search-box" placeholder="e.g. how do I set up postgres replication?" onkeydown="if(event.key==='Enter') executeSearch()">
+                    <button class="search-btn" id="searchBtn" onclick="executeSearch()">QUERY</button>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
+                <div class="search-hints">
+                    <span style="font-size:11px; color:#006622; align-self:center;">Quick filters:</span>
+                    <span class="hint-pill" onclick="quickFilter('postgresql')">🐘 PostgreSQL</span>
+                    <span class="hint-pill" onclick="quickFilter('redis')">⚡ Redis</span>
+                    <span class="hint-pill" onclick="quickFilter('aws')">☁️ AWS</span>
+                                    <span class="hint-pill" onclick="quickFilter('devops')">🚀 DevOps</span>
+                    <span class="hint-pill" onclick="quickFilter('ansible')">📜 Ansible</span>
+                </div>
             </div>
 
-            <div class="card" data-tags="redis cache memory nosql datastore" onclick="openHub('Redis Architecture', [
-                { text: 'Redis Crash Course', url: 'https://redis.io/docs/latest/develop/' },
-                { text: 'Memory Optimization & Eviction Policies', url: 'https://redis.io/docs/latest/operate/rs/databases/memory-performance/eviction-policy/' },
-                { text: 'Pub/Sub Messaging Patterns', url: 'https://redis.io/docs/latest/develop/interact/pubsub/' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>Cache</span><span>[ MEM ]</span></div>
-                    <div class="card-title">Redis</div>
-                    <div class="card-desc">In-memory structures, LRU eviction policies, session layers, and cluster caching.</div>
+            <div id="ai-search-results">
+                <div class="ai-results-header">
+                    <span id="aiStatusText">⚡ MATRIX SEARCH RESULT</span>
+                    <span style="cursor:pointer; color:#008833;" onclick="closeAISearch()">[✕]</span>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
+                <div class="ai-results-content" id="aiAnswerBody"></div>
+            </div>
+        </section>
+
+        <section class="stacks" id="stacks">
+            <div class="category-header">
+                <span>INDEXED NODES</span>
+                <span id="cardCount">9 Tracks</span>
             </div>
 
-            <div class="card" data-tags="aws amazon web services ec2 s3 lambda vpc cloud" onclick="openHub('AWS Cloud Infrastructure', [
-                { text: 'AWS Cloud Practitioner Pathway', url: 'https://aws.amazon.com/training/learn-about/cloud-practitioner/' },
-                { text: 'Azure to AWS Migration Architecture', url: 'https://aws.amazon.com/architecture/migration-architecture/' },
-                { text: 'Amazon EKS Cluster Setup', url: 'https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>Cloud</span><span>[ AWS ]</span></div>
-                    <div class="card-title">Amazon Web Services</div>
-                    <div class="card-desc">Multi-AZ VPC provisioning, EKS deployments, identity governance, and AWS transitions.</div>
-                </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
-            </div>
+            <div class="grid" id="cardsGrid">
 
-            <div class="card" data-tags="azure microsoft cloud vms aks storage entra id" onclick="openHub('Microsoft Azure', [
-                { text: 'Azure Architecture Center', url: 'https://learn.microsoft.com/en-us/azure/architecture/' },
-                { text: 'AKS (Kubernetes) Deployment Guide', url: 'https://learn.microsoft.com/en-us/azure/aks/' },
-                { text: 'Entra ID & Access Management', url: 'https://learn.microsoft.com/en-us/entra/fundamentals/' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>Cloud</span><span>[ AZURE ]</span></div>
-                    <div class="card-title">Microsoft Azure</div>
-                    <div class="card-desc">AKS cluster setups, virtual networking fabrics, and Entra ID access control layers.</div>
+                <div class="card" data-keywords="postgresql database sql tuning replication postgres" onclick="openTutorial('PostgreSQL Architecture & Tuning', ['Configure connection pooling via pgBouncer to handle concurrent client requests.', 'Optimize slow queries using <code>EXPLAIN ANALYZE</code>.', 'Set up streaming replication by configuring <code>wal_level = replica</code> in postgresql.conf.', 'Automate daily backups using <code>pg_dump</code> scripts.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">DATABASE / SQL</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">PostgreSQL</h2>
+                        <p class="card-description">Deep-dive configurations, connection pooling, high-availability clusters, and query optimization.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
-            </div>
 
-            <div class="card" data-tags="gcp google cloud platform compute gke iam run" onclick="openHub('Google Cloud Platform', [
-                { text: 'GCP Fundamentals', url: 'https://cloud.google.com/docs/get-started' },
-                { text: 'Serverless via Cloud Run', url: 'https://cloud.google.com/run/docs/quickstarts' },
-                { text: 'GKE Orchestration Basics', url: 'https://cloud.google.com/kubernetes-engine/docs' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>Cloud</span><span>[ GCP ]</span></div>
-                    <div class="card-title">Google Cloud</div>
-                    <div class="card-desc">GKE architecture nodes, serverless Cloud Run scaling, and IAM governance.</div>
+                <div class="card" data-keywords="redis cache memory nosql datastore" onclick="openTutorial('Redis In-Memory Caching & Pub/Sub', ['Install Redis server and bind configuration to local network interfaces.', 'Configure memory eviction policies (e.g., <code>allkeys-lru</code>) to prevent crashes.', 'Implement session caching layers using Redis keys with TTL limits.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">DATABASE / CACHE</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">Redis</h2>
+                        <p class="card-description">In-memory data structures, pub/sub messaging patterns, and low-latency cluster caching.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
-            </div>
 
-            <div class="card" data-tags="aws devops pipelines codebuild codepipeline terraform automation" onclick="openHub('AWS DevOps & IaC', [
-                { text: 'DevOps Roadmap (roadmap.sh)', url: 'https://roadmap.sh/devops' },
-                { text: 'Terraform AWS Provider Docs', url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs' },
-                { text: 'AWS CodePipeline Automation', url: 'https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>DevOps</span><span>[ CI/CD ]</span></div>
-                    <div class="card-title">AWS DevOps</div>
-                    <div class="card-desc">Modular Terraform topologies, CodeBuild tracking, and automated artifact workflows.</div>
+                <div class="card" data-keywords="mysql database relational innodb storage" onclick="openTutorial('MySQL InnoDB Tuning & Replication', ['Tune InnoDB buffer pool size to roughly 70-80% of server RAM.', 'Establish master-replica replication channels to offload heavy read traffic.', 'Execute routine index maintenance and monitor slow query logs.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">DATABASE / SQL</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">MySQL</h2>
+                        <p class="card-description">InnoDB engine optimizations, master-replica setups, and schema migration workflows.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
-            </div>
 
-            <div class="card" data-tags="azure devops pipelines yaml boards repos artifacts" onclick="openHub('Azure DevOps Core', [
-                { text: 'Azure DevOps Documentation', url: 'https://learn.microsoft.com/en-us/azure/devops/' },
-                { text: 'Creating Multi-Stage YAML Pipelines', url: 'https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/yaml-pipeline-editor' },
-                { text: 'Agile Project Tracking in Boards', url: 'https://learn.microsoft.com/en-us/azure/devops/boards/get-started/' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>DevOps</span><span>[ CI/CD ]</span></div>
-                    <div class="card-title">Azure DevOps</div>
-                    <div class="card-desc">Multi-stage YAML build pipelines, branching policies inside Repos, and agile boards.</div>
+                <div class="card" data-keywords="aws amazon web services ec2 s3 lambda vpc cloud" onclick="openTutorial('AWS Core Infrastructure Deployment', ['Design secure multi-AZ VPCs with public/private subnets and NAT gateways.', 'Provision EC2 application instances or container workloads on Amazon EKS.', 'Manage secure access permissions using granular IAM roles and security groups.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">CLOUD / INFRASTRUCTURE</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">Amazon Web Services (AWS)</h2>
+                        <p class="card-description">Core architecture across EC2, S3, IAM, Lambda, VPC, and EKS with automated provisioning.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
-            </div>
 
-            <div class="card" data-tags="mysql database relational innodb storage" onclick="openHub('MySQL Administration', [
-                { text: 'InnoDB Storage Engine Guide', url: 'https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html' },
-                { text: 'Replication Setup & Tuning', url: 'https://dev.mysql.com/doc/refman/8.0/en/replication.html' },
-                { text: 'Query Optimization Strategies', url: 'https://dev.mysql.com/doc/refman/8.0/en/optimization.html' }
-            ])">
-                <div>
-                    <div class="card-meta"><span>Database</span><span>[ DB ]</span></div>
-                    <div class="card-title">MySQL</div>
-                    <div class="card-desc">InnoDB engine optimization, master-replica sync infrastructure, and query logs.</div>
+                <div class="card" data-keywords="azure microsoft cloud vms aks storage entra id" onclick="openTutorial('Microsoft Azure Cloud Architecture', ['Configure Azure Resource Groups and Virtual Networks with customized subnets.', 'Deploy and manage Azure Kubernetes Service (AKS) clusters.', 'Secure enterprise environments using Microsoft Entra ID and RBAC roles.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">CLOUD / INFRASTRUCTURE</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">Microsoft Azure</h2>
+                        <p class="card-description">Enterprise cloud setups covering Virtual Machines, AKS clusters, storage, and Entra ID.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
                 </div>
-                <div class="card-action">OPEN RESOURCE HUB ↗</div>
-            </div>
 
-        </div>
+                <div class="card" data-keywords="gcp google cloud platform compute gke iam run" onclick="openTutorial('Google Cloud Platform (GCP) Deployment', ['Initialize GCP projects and configure Virtual Private Cloud networks.', 'Deploy serverless applications rapidly using Google Cloud Run services.', 'Manage container deployments with Google Kubernetes Engine (GKE).'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">CLOUD / INFRASTRUCTURE</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">Google Cloud Platform (GCP)</h2>
+                        <p class="card-description">Global network deployments, GKE, Cloud Run services, and fine-grained IAM governance.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
+                </div>
+
+                <div class="card" data-keywords="aws devops pipelines codebuild codepipeline terraform automation" onclick="openTutorial('AWS DevOps CI/CD Automation Pipelines', ['Write Infrastructure-as-Code using Terraform templates.', 'Configure source version control repositories.', 'Build automated compilation scripts using AWS CodeBuild and CodePipeline.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">DEVOPS / AWS</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">AWS DevOps Pipelines</h2>
+                        <p class="card-description">Automated build and release workflows using CodeBuild, CodePipeline, and Terraform.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
+                </div>
+
+                <div class="card" data-keywords="azure devops pipelines yaml boards repos artifacts" onclick="openTutorial('Azure DevOps YAML Pipelines & Boards', ['Set up Azure Repos and configure branching policies.', 'Create multi-stage <code>azure-pipelines.yml</code> files for build and deployment workflows.', 'Track project tasks and agile boards.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">DEVOPS / AZURE</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">Azure DevOps</h2>
+                        <p class="card-description">Multi-stage YAML deployment pipelines, artifact registries, and agile board tracking workflows.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
+                </div>
+
+                <div class="card" data-keywords="ansible playbook automation configuration management inventory yaml roles idempotent" onclick="openTutorial('Ansible Playbooks & Configuration Automation', ['Define an <code>inventory</code> file listing target hosts and groups.', 'Write a playbook in YAML declaring tasks, handlers, and roles.', 'Use modules (e.g. <code>apt</code>, <code>copy</code>, <code>service</code>) for idempotent, repeatable changes.', 'Run with <code>ansible-playbook -i inventory site.yml</code> and layer in Ansible Vault for secrets.'])">
+                    <div>
+                        <div class="card-top"><div class="card-meta">DEVOPS / AUTOMATION</div><span class="internal-link">OPEN ▸</span></div>
+                        <h2 class="card-title">Ansible</h2>
+                        <p class="card-description">Agentless configuration management — playbooks, roles, inventories, and idempotent automation at scale.</p>
+                    </div>
+                    <div><span class="tutorial-badge">▶ Execute Protocol Guide</span></div>
+                </div>
+
+            </div>
+        </section>
+        </main>
+
+        <footer>
+            <p>Matrix Construct synced with <a href="https://dev.to/sudlo2014" target="_blank" style="color:#00ff66;">dev.to/sudlo2014</a> | Built on GitHub Pages.</p>
+        </footer>
+
     </div>
 
-    <div id="roadmapModal" onclick="closeHubOutside(event)">
+    <div id="tutorialModal" onclick="closeTutorialOutside(event)">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="modal-title" id="modalTitle">Resource Hub</span>
-                <button class="close-btn" onclick="closeHub()">[✕]</button>
+                <span class="modal-title" id="modalTitle">Protocol Guide</span>
+                <button class="close-btn" onclick="closeTutorial()">[✕]</button>
             </div>
-            <div class="roadmap-links-container" id="modalLinksContainer">
-                </div>
+            <div class="tutorial-steps">
+                <p style="color:#008833; font-size:12px; margin-bottom:15px;">EXECUTION DIRECTIVE:</p>
+                <ol id="modalStepsList"></ol>
+            </div>
         </div>
     </div>
 
+
+
     <script>
-        // Matrix Rain Background
+        // ============ Matrix Rain ============
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-/<>\\';
 
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-/<>\\';
         const fontSize = 16;
-        let columns = canvas.width / fontSize;
-        const rainDrops = Array(Math.floor(columns)).fill(1);
+        let columns, rainDrops;
 
-        setInterval(() => {
+        function initMatrix() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = Math.ceil(canvas.width / fontSize);
+            rainDrops = new Array(columns).fill(1);
+        }
+        window.addEventListener('resize', initMatrix);
+        initMatrix();
+
+        function drawMatrixRain() {
             ctx.fillStyle = 'rgba(3, 10, 3, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00ff66';
@@ -215,53 +333,260 @@
                 if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) { rainDrops[i] = 0; }
                 rainDrops[i]++;
             }
-        }, 30);
+        }
+        setInterval(drawMatrixRain, 30);
 
-        // Search Engine
-        function runGridSearch() {
-            const filter = document.getElementById("matrixSearch").value.toLowerCase();
-            const cards = document.getElementsByClassName("card");
-            let found = 0;
+        // ============ Node knowledge base (used both for local fallback and as AI context) ============
+        const NODES = [
+            { title: 'PostgreSQL', category: 'Database / SQL', keywords: 'postgresql database sql tuning replication postgres',
+              summary: 'Connection pooling via pgBouncer, EXPLAIN ANALYZE query tuning, streaming replication (wal_level=replica), automated pg_dump backups.' },
+            { title: 'Redis', category: 'Database / Cache', keywords: 'redis cache memory nosql datastore',
+              summary: 'In-memory caching, memory eviction policies (allkeys-lru), pub/sub messaging, session caching with TTL.' },
+            { title: 'MySQL', category: 'Database / SQL', keywords: 'mysql database relational innodb storage',
+              summary: 'InnoDB buffer pool tuning (70-80% RAM), master-replica replication, index maintenance, slow query log monitoring.' },
+            { title: 'Amazon Web Services (AWS)', category: 'Cloud / Infrastructure', keywords: 'aws amazon web services ec2 s3 lambda vpc cloud',
+              summary: 'Multi-AZ VPC design, EC2 and EKS provisioning, IAM roles and security groups.' },
+            { title: 'Microsoft Azure', category: 'Cloud / Infrastructure', keywords: 'azure microsoft cloud vms aks storage entra id',
+              summary: 'Resource Groups and VNets, AKS cluster deployment, Entra ID and RBAC security.' },
+            { title: 'Google Cloud Platform (GCP)', category: 'Cloud / Infrastructure', keywords: 'gcp google cloud platform compute gke iam run',
+              summary: 'VPC networking, Cloud Run serverless deployment, GKE container orchestration, IAM governance.' },
+            { title: 'AWS DevOps Pipelines', category: 'DevOps / AWS', keywords: 'aws devops pipelines codebuild codepipeline terraform automation',
+              summary: 'Terraform infrastructure-as-code, source control setup, CodeBuild/CodePipeline automated builds.' },
+            { title: 'Azure DevOps', category: 'DevOps / Azure', keywords: 'azure devops pipelines yaml boards repos artifacts',
+              summary: 'Azure Repos branching policies, multi-stage azure-pipelines.yml, agile board tracking.' },
+            { title: 'Ansible', category: 'DevOps / Automation', keywords: 'ansible playbook automation configuration management inventory yaml roles idempotent',
+              summary: 'Agentless configuration management with YAML playbooks, inventories, roles, and idempotent modules (apt, copy, service); secrets via Ansible Vault.' },
+        ];
 
-            for (let i = 0; i < cards.length; i++) {
-                const searchContext = (cards[i].innerText + " " + cards[i].getAttribute("data-tags")).toLowerCase();
-                if (searchContext.includes(filter)) {
-                    cards[i].style.display = "flex";
-                    found++;
-                } else {
-                    cards[i].style.display = "none";
+        // ============ Matrix Intelligence Core (100% local — no keys, no network calls) ============
+
+        // Synonym expansion so "hosting", "storage layer", "queries slow" etc. still land
+        const SYNONYMS = {
+            'db': 'database', 'postgres': 'postgresql', 'psql': 'postgresql',
+            'cache': 'redis', 'caching': 'redis', 'in-memory': 'redis',
+            'k8s': 'kubernetes', 'kube': 'kubernetes', 'aks': 'azure kubernetes',
+            'gcp': 'google cloud', 'google': 'google cloud',
+            'amazon': 'aws', 'ec2': 'aws', 's3': 'aws', 'lambda': 'aws',
+            'ms': 'microsoft', 'entra': 'azure entra',
+            'ci': 'devops pipelines', 'cd': 'devops pipelines', 'pipeline': 'devops pipelines',
+            'terraform': 'devops', 'iac': 'devops terraform',
+            'slow': 'tuning optimization', 'speed': 'tuning optimization', 'fast': 'tuning optimization',
+            'backup': 'backups', 'replica': 'replication', 'replicate': 'replication',
+            'scale': 'scaling clustering', 'scaling': 'clustering',
+            'host': 'hosting infrastructure', 'hosting': 'infrastructure cloud',
+            'agent': 'ai agent automation'
+        };
+
+        const STOPWORDS = new Set(['a','an','the','is','are','how','do','i','to','for','of','on','in','with','my',
+            'what','which','best','way','can','you','help','me','set','up','setup','need','want','and','or','it',
+            'this','that','using','use','about','please','pls','plz','vs','versus']);
+
+        function tokenize(text) {
+            return text.toLowerCase()
+                .replace(/[^a-z0-9\s]/g, ' ')
+                .split(/\s+/)
+                .filter(Boolean);
+        }
+
+        function expandTokens(tokens) {
+            const expanded = new Set();
+            tokens.forEach(t => {
+                if (STOPWORDS.has(t)) return;
+                expanded.add(t);
+                if (SYNONYMS[t]) SYNONYMS[t].split(' ').forEach(s => expanded.add(s));
+            });
+            return Array.from(expanded);
+        }
+
+        // Levenshtein distance for typo tolerance ("posgres", "kubernets", etc.)
+        function levenshtein(a, b) {
+            const m = a.length, n = b.length;
+            if (m === 0) return n;
+            if (n === 0) return m;
+            const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+            for (let i = 0; i <= m; i++) dp[i][0] = i;
+            for (let j = 0; j <= n; j++) dp[0][j] = j;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    dp[i][j] = a[i - 1] === b[j - 1]
+                        ? dp[i - 1][j - 1]
+                        : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
                 }
             }
-            document.getElementById("matchLabel").innerText = found + (found === 1 ? " Module Active" : " Modules Active");
+            return dp[m][n];
         }
 
-        // Roadmap Hub Functions
-        function openHub(title, linksArray) {
-            document.getElementById('modalTitle').innerText = title;
-            const container = document.getElementById('modalLinksContainer');
-            container.innerHTML = ''; 
-            
-            linksArray.forEach(link => {
-                const a = document.createElement('a');
-                a.href = link.url;
-                a.target = "_blank";
-                a.className = "hub-link";
-                a.innerHTML = `${link.text} <span>↗</span>`;
-                container.appendChild(a);
-            });
-            
-            document.getElementById('roadmapModal').style.display = 'flex';
-        }
-
-        function closeHub() {
-            document.getElementById('roadmapModal').style.display = 'none';
-        }
-
-        function closeHubOutside(event) {
-            if (event.target === document.getElementById('roadmapModal')) {
-                closeHub();
+        function fuzzyTokenScore(token, corpusWords) {
+            let best = 0;
+            for (const w of corpusWords) {
+                if (w === token) return 1;
+                if (w.includes(token) || token.includes(w)) best = Math.max(best, 0.7);
+                const dist = levenshtein(token, w);
+                const tolerance = Math.max(1, Math.floor(w.length * 0.3));
+                if (dist <= tolerance) best = Math.max(best, 0.5);
             }
+            return best;
         }
+
+        // Rank every node against the query using expanded + fuzzy token overlap
+        function rankNodes(query) {
+            const rawTokens = tokenize(query);
+            const queryTokens = expandTokens(rawTokens);
+            if (queryTokens.length === 0) return [];
+
+            return NODES.map(node => {
+                const corpusWords = tokenize(node.title + ' ' + node.keywords + ' ' + node.summary + ' ' + node.category);
+                let score = 0;
+                queryTokens.forEach(qt => { score += fuzzyTokenScore(qt, corpusWords); });
+                return { node, score: score / queryTokens.length };
+            })
+            .filter(r => r.score > 0.15)
+            .sort((a, b) => b.score - a.score);
+        }
+
+        // Detect intent so the reply reads like it understood the question, not just matched words
+        function detectIntent(query) {
+            const q = query.toLowerCase();
+            if (/^(what|which)\s+is/.test(q) || q.includes('difference between') || q.includes(' vs ')) return 'compare';
+            if (/^how\s+(do|can|to)/.test(q) || q.includes('set up') || q.includes('setup') || q.includes('configure')) return 'howto';
+            if (q.includes('slow') || q.includes('optimi') || q.includes('tune') || q.includes('performance')) return 'optimize';
+            if (q.includes('backup') || q.includes('recover') || q.includes('disaster')) return 'resilience';
+            return 'general';
+        }
+
+        function synthesizeAnswer(query, ranked) {
+            const intent = detectIntent(query);
+            if (ranked.length === 0) {
+                return `No node in the grid matches "${query}" closely enough. Try rephrasing, or use a quick filter like postgresql, redis, aws, azure, gcp, or devops.`;
+            }
+
+            const top = ranked[0].node;
+            const runnersUp = ranked.slice(1, 3).map(r => r.node.title);
+            const confidence = ranked[0].score >= 0.6 ? 'high' : ranked[0].score >= 0.3 ? 'moderate' : 'low';
+
+            let lead;
+            if (intent === 'howto') {
+                lead = `Best match for that: ${top.title}. ${top.summary}`;
+            } else if (intent === 'compare' && runnersUp.length > 0) {
+                lead = `Closest comparison set: ${top.title} vs ${runnersUp.join(' / ')}. ${top.title} — ${top.summary}`;
+            } else if (intent === 'optimize') {
+                lead = `For tuning/performance on this, start with ${top.title}: ${top.summary}`;
+            } else if (intent === 'resilience') {
+                lead = `For backup/resilience, ${top.title} is the relevant node: ${top.summary}`;
+            } else {
+                lead = `${top.title} [${top.category}] — ${top.summary}`;
+            }
+
+            let tail = '';
+            if (runnersUp.length > 0 && intent !== 'compare') {
+                tail = `\n\nAlso relevant: ${runnersUp.join(', ')}.`;
+            }
+            const confNote = confidence === 'low'
+                ? '\n\n(Low-confidence match — the grid may not have exactly what you asked for.)'
+                : '';
+
+            return lead + tail + confNote;
+        }
+
+        // ============ Search ============
+        function executeSearch() {
+            const input = document.getElementById('searchInput').value.trim();
+            const resultsPanel = document.getElementById('ai-search-results');
+            const answerBody = document.getElementById('aiAnswerBody');
+            const statusText = document.getElementById('aiStatusText');
+
+            if (input === '') {
+                resultsPanel.style.display = 'none';
+                filterCardsByKeyword('');
+                return;
+            }
+
+            resultsPanel.style.display = 'block';
+            statusText.innerText = '⚡ MATRIX INTELLIGENCE CORE // LOCAL INFERENCE';
+
+            const ranked = rankNodes(input);
+            answerBody.innerText = synthesizeAnswer(input, ranked);
+
+            filterCardsByKeyword(input, ranked);
+        }
+
+        function filterCardsByKeyword(input, ranked) {
+            const q = input.trim();
+            const cards = document.getElementsByClassName('card');
+
+            if (q === '') {
+                for (let i = 0; i < cards.length; i++) {
+                    cards[i].style.display = 'flex';
+                    cards[i].classList.remove('ai-highlighted');
+                }
+                document.getElementById('cardCount').innerText = cards.length + ' Tracks';
+                return;
+            }
+
+            const matchedTitles = new Set((ranked || []).map(r => r.node.title));
+            let matchCount = 0;
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('.card-title').innerText;
+                if (matchedTitles.has(title)) {
+                    cards[i].style.display = 'flex';
+                    cards[i].classList.add('ai-highlighted');
+                    matchCount++;
+                } else {
+                    cards[i].style.display = 'none';
+                    cards[i].classList.remove('ai-highlighted');
+                }
+            }
+            document.getElementById('cardCount').innerText = matchCount + ' Tracks Match';
+        }
+
+        function quickFilter(term) {
+            document.getElementById('searchInput').value = term;
+            executeSearch();
+        }
+
+        function closeAISearch() {
+            document.getElementById('ai-search-results').style.display = 'none';
+        }
+
+        function openTutorial(title, steps) {
+            document.getElementById('modalTitle').innerText = title;
+            const list = document.getElementById('modalStepsList');
+            list.innerHTML = '';
+            steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerHTML = step;
+                list.appendChild(li);
+            });
+            document.getElementById('tutorialModal').style.display = 'flex';
+        }
+
+        function closeTutorial() {
+            document.getElementById('tutorialModal').style.display = 'none';
+        }
+
+        function closeTutorialOutside(event) {
+            if (event.target === document.getElementById('tutorialModal')) { document.getElementById('tutorialModal').style.display = 'none'; }
+        }
+
+        // Keyboard accessibility: Enter/Space on cards, Escape to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('tutorialModal').style.display = 'none';
+                document.getElementById('ai-search-results').style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('.card').forEach(function(card) {
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+
     </script>
 </body>
 </html>
