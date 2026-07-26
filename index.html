@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudlo2026 | Cloud, Databases & DevOps Knowledge Base</title>
+    <title>Sudlo2026 | AI-Powered Cloud & DevOps Search Engine</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,39 +66,39 @@
             margin-bottom: 30px;
         }
 
-        /* Search Console */
+        /* AI Search Console (Google-like AI Search Bar) */
         .search-console {
             background-color: #121212;
             border: 1px solid #222;
-            padding: 20px;
-            border-radius: 6px;
+            padding: 24px;
+            border-radius: 8px;
             margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 25px rgba(0,199,183,0.05);
         }
         .search-input-wrapper {
             display: flex;
             align-items: center;
             background-color: #0a0a0a;
             border: 1px solid #333;
-            border-radius: 4px;
-            padding: 12px 16px;
+            border-radius: 6px;
+            padding: 14px 18px;
             gap: 12px;
         }
-        .search-input-wrapper:focus-within { border-color: #00c7b7; }
-        .ai-prompt-symbol { color: #00c7b7; font-weight: bold; }
+        .search-input-wrapper:focus-within { border-color: #00c7b7; box-shadow: 0 0 10px rgba(0,199,183,0.1); }
+        .ai-prompt-symbol { color: #00c7b7; font-weight: bold; font-size: 16px; }
         .search-box {
             background: transparent;
             border: none;
             color: #fff;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
+            font-size: 15px;
             width: 100%;
             outline: none;
         }
         .search-hints {
             display: flex;
             gap: 10px;
-            margin-top: 12px;
+            margin-top: 14px;
             flex-wrap: wrap;
         }
         .hint-pill {
@@ -106,24 +106,26 @@
             border: 1px solid #2a2a2a;
             color: #aaa;
             font-size: 11px;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             cursor: pointer;
         }
-        .hint-pill:hover { border-color: #00c7b7; color: #fff; }
+        .hint-pill:hover { border-color: #00c7b7; color: #fff; background-color: #152222; }
 
-        /* Agent Response Panel */
-        #agent-response-panel {
+        /* AI Search Results / Synthesis Panel */
+        #ai-search-results {
             display: none;
-            background-color: #0f1717;
+            background-color: #0d1313;
             border: 1px solid #00c7b7;
             padding: 24px;
-            border-radius: 6px;
+            border-radius: 8px;
             margin-bottom: 40px;
         }
-        .agent-header { color: #00c7b7; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between; }
-        .agent-body ol { margin-left: 20px; color: #ccc; margin-top: 10px; }
-        .agent-body li { margin-bottom: 8px; }
+        .ai-results-header { color: #00c7b7; font-weight: bold; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .ai-results-content { color: #ccc; font-size: 13.5px; line-height: 1.7; }
+        .ai-results-content ul, .ai-results-content ol { margin-left: 20px; margin-top: 10px; }
+        .ai-results-content li { margin-bottom: 6px; }
+        .ai-results-content code { background: #162424; color: #00c7b7; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
 
         /* Grid Section */
         .category-header {
@@ -208,62 +210,54 @@
                 <span class="logo-icon">>_</span>
                 <span class="logo-text">
                     Sudlo2026.Index
-                    <span class="logo-subtitle">Cloud & DevOps Knowledge Base</span>
+                    <span class="logo-subtitle">AI-Powered Cloud & DevOps Engine</span>
                 </span>
             </a>
             <nav class="nav-links">
                 <a href="https://dev.to/sudlo2014" target="_blank">Dev.to Blog ↗</a>
                 <a href="#stacks">Stacks</a>
-                <a href="#search">Search</a>
+                <a href="#search">AI Search</a>
             </nav>
         </header>
 
         <section class="hero">
             <div class="hero-status">
-                <span class="status-dot"></span> LIVE . TUTORIAL & REASONING ENGINE ONLINE
+                <span class="status-dot"></span> AI SEARCH ENGINE ONLINE
             </div>
             <h1 class="hero-title">
-                Search databases, clouds & DevOps. <span class="title-highlight">Get step-by-step tutorials.</span>
+                Ask anything about databases, clouds & DevOps. <span class="title-highlight">Get instant AI synthesis.</span>
             </h1>
             <p class="hero-description">
-                Click any module below to launch an interactive step-by-step tutorial guide, or use the search console for automated deployment steps.
+                Type any technical question in the AI search bar below. The reasoning engine will instantly formulate a targeted guide and filter relevant modules.
             </p>
 
             <div class="search-console" id="search">
                 <div class="search-input-wrapper">
-                    <span class="ai-prompt-symbol">AI></span>
-                    <input type="text" id="searchInput" class="search-box" placeholder="Search database tuning, Kubernetes, AWS migration, or type 'create an agent'..." onkeyup="filterCards()">
+                    <span class="ai-prompt-symbol">🔍</span>
+                    <input type="text" id="searchInput" class="search-box" placeholder="Ask AI: e.g., 'how to configure postgres replication' or 'create an agent'..." oninput="handleAISearch()">
                 </div>
                 <div class="search-hints">
-                    <span style="font-size:11px; color:#555; align-self:center;">Try searching:</span>
-                    <span class="hint-pill" onclick="quickSearch('postgresql')">PostgreSQL</span>
-                    <span class="hint-pill" onclick="quickSearch('redis')">Redis Caching</span>
-                    <span class="hint-pill" onclick="quickSearch('aws')">AWS Architecture</span>
-                    <span class="hint-pill" onclick="quickSearch('create an agent')">🤖 Create an Agent</span>
-                    <span class="hint-pill" onclick="quickSearch('devops')">Azure/AWS DevOps</span>
+                    <span style="font-size:11px; color:#555; align-self:center;">AI Prompts:</span>
+                    <span class="hint-pill" onclick="runAIQuery('create an agent')">🤖 Create an Agent</span>
+                    <span class="hint-pill" onclick="runAIQuery('postgresql replication setup')">🐘 PostgreSQL Replication</span>
+                    <span class="hint-pill" onclick="runAIQuery('aws terraform pipeline')">☁️ AWS Terraform Pipeline</span>
+                    <span class="hint-pill" onclick="runAIQuery('redis cache tuning')">⚡ Redis Caching</span>
                 </div>
             </div>
 
-            <div id="agent-response-panel">
-                <div class="agent-header">
-                    <span>⚡ AGENT REASONING OUTPUT: LOCAL AGENT WORKFLOW</span>
-                    <span style="cursor:pointer; color:#888;" onclick="closeAgentPanel()">[✕]</span>
+            <div id="ai-search-results">
+                <div class="ai-results-header">
+                    <span id="aiStatusText">⚡ AI SEARCH SYNTHESIS</span>
+                    <span style="cursor:pointer; color:#888;" onclick="closeAISearch()">[✕]</span>
                 </div>
-                <div class="agent-body">
-                    <p style="color:#e0e0e0; font-size:13px;">Here is your step-by-step framework to build and run an automated agent locally:</p>
-                    <ol>
-                        <li><strong>Initialize Environment:</strong> Set up a clean Python workspace using Git Bash on Windows.</li>
-                        <li><strong>Install Dependencies:</strong> Run <code style="color:#00c7b7;">pip install langchain openai chromadb</code> to build the reasoning loop.</li>
-                        <li><strong>Configure Local Models:</strong> Connect your execution controller script to local or cloud LLM endpoints via environment variables.</li>
-                        <li><strong>Deploy Automation:</strong> Wrap your execution steps in structured modular tools for continuous pipeline automation.</li>
-                    </ol>
-                </div>
+                <div class="ai-results-content" id="aiAnswerBody">
+                    </div>
             </div>
         </section>
 
         <section class="stacks" id="stacks">
             <div class="category-header">
-                <span>INDEXED TUTORIAL MODULES</span>
+                <span>INDEXED KNOWLEDGE MODULES</span>
                 <span id="cardCount">8 Tracks</span>
             </div>
 
@@ -357,7 +351,7 @@
                     <div>
                         <div class="card-top">
                             <div class="card-meta">DEVOPS / AZURE</div>
-                            <span class="external-link">TUTORIAL ↗</span>
+                            <span class="external-link">CI/CD</span>
                         </div>
                         <h2 class="card-title">Azure DevOps</h2>
                         <p class="card-description">Multi-stage YAML deployment pipelines, artifact registries, git repository management, and agile board tracking workflows.</p>
@@ -382,72 +376,78 @@
             </div>
             <div class="tutorial-steps">
                 <p style="color:#888; font-size:12px; margin-bottom:15px;">STEP-BY-STEP EXECUTION PROTOCOL:</p>
-                <ol id="modalStepsList">
-                    </ol>
+                <ol id="modalStepsList"></ol>
             </div>
         </div>
     </div>
 
     <script>
-        function filterCards() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
+        function handleAISearch() {
+            let input = document.getElementById('searchInput').value.trim().toLowerCase();
+            let resultsPanel = document.getElementById('ai-search-results');
+            let answerBody = document.getElementById('aiAnswerBody');
+            let statusText = document.getElementById('aiStatusText');
             let cards = document.getElementsByClassName('card');
-            let agentPanel = document.getElementById('agent-response-panel');
             let matchCount = 0;
 
-            if (input.includes('agent') || input.includes('create an agent')) {
-                agentPanel.style.display = 'block';
-            } else {
-                agentPanel.style.display = 'none';
+            if (input === '') {
+                resultsPanel.style.display = 'none';
+                // Reset card visibility
+                for (let i = 0; i < cards.length; i++) { cards[i].style.display = 'flex'; }
+                document.getElementById('cardCount').innerText = cards.length + " Tracks";
+                return;
             }
 
+            // Show AI Search loading state simulation
+            resultsPanel.style.display = 'block';
+            statusText.innerHTML = "⚡ AI SEARCH SYNTHESIS: Analyzing query...";
+            answerBody.innerHTML = `<p style="color:#888; font-style:italic;">Synthesizing expert architecture notes for: "<strong>${input}</strong>"...</p>`;
+
+            // Simulate AI generative response after a tiny delay for realism
+            setTimeout(() => {
+                statusText.innerHTML = "⚡ AI SEARCH SYNTHESIS: Complete";
+                
+                if (input.includes('agent') || input.includes('create an agent')) {
+                    answerBody.innerHTML = `
+                        <p><strong>AI Agent Generation Framework:</strong></p>
+                        <ol>
+                            <li>Initialize your workspace environment using Git Bash on Windows.</li>
+                            <li>Install necessary packages: <code>pip install langchain openai chromadb</code>.</li>
+                            <li>Configure control loops and link environment API endpoints for reasoning execution.</li>
+                        </ol>`;
+                } else if (input.includes('postgres') || input.includes('replication')) {
+                    answerBody.innerHTML = `
+                        <p><strong>PostgreSQL Synthesis Guide:</strong></p>
+                        <ol>
+                            <li>Set <code>wal_level = replica</code> in your primary node configuration file.</li>
+                            <li>Create a dedicated replication user role on the database cluster.</li>
+                            <li>Configure standby nodes using base backups and streaming connection strings.</li>
+                        </ol>`;
+                } else if (input.includes('aws') || input.includes('terraform') || input.includes('pipeline')) {
+                    answerBody.innerHTML = `
+                        <p><strong>AWS Infrastructure Synthesis:</strong></p>
+                        <ol>
+                            <li>Define infrastructure modules using Terraform HCL scripts.</li>
+                            <li>Set up state locks in Amazon S3 buckets with DynamoDB tracking tables.</li>
+                            <li>Deploy through automated AWS CodePipeline build actions.</li>
+                        </ol>`;
+                } else {
+                    answerBody.innerHTML = `
+                        <p><strong>Generated Overview for "${input}":</strong></p>
+                        <p style="margin-top:8px;">Indexed matching knowledge modules below contain the required configurations, schema tuning parameters, and CI/CD pipeline steps for this domain.</p>`;
+                }
+            }, 300);
+
+            // Simultaneously filter cards matching the query
             for (let i = 0; i < cards.length; i++) {
                 let keywords = cards[i].getAttribute('data-keywords');
                 let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
                 let desc = cards[i].querySelector('.card-description').innerText.toLowerCase();
 
-                if (keywords.includes(input) || title.includes(input) || desc.includes(input) || input === '') {
+                if (keywords.includes(input) || title.includes(input) || desc.includes(input)) {
                     cards[i].style.display = "flex";
                     matchCount++;
                 } else {
                     cards[i].style.display = "none";
                 }
             }
-            document.getElementById('cardCount').innerText = matchCount + " Tracks Visible";
-        }
-
-        function quickSearch(term) {
-            document.getElementById('searchInput').value = term;
-            filterCards();
-        }
-
-        function closeAgentPanel() {
-            document.getElementById('agent-response-panel').style.display = 'none';
-        }
-
-        // Tutorial Modal Functions
-        function openTutorial(title, steps) {
-            document.getElementById('modalTitle').innerText = title;
-            let list = document.getElementById('modalStepsList');
-            list.innerHTML = '';
-            steps.forEach(step => {
-                let li = document.createElement('li');
-                li.innerHTML = step;
-                list.appendChild(li);
-            });
-            document.getElementById('tutorialModal').style.display = 'flex';
-        }
-
-        function closeTutorial() {
-            document.getElementById('tutorialModal').style.display = 'none';
-        }
-
-        function closeTutorialOutside(event) {
-            let modal = document.getElementById('tutorialModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-    </script>
-</body>
-</html>
