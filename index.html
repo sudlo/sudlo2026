@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI.Terminal | DevOps.AI.Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset & Base Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: #0a0a0a; /* Pure black background */
+            color: #e0e0e0;
+            font-family: 'JetBrains Mono', monospace; /* The terminal font */
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+
+        /* Layout Wrapper */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 1. Header / Nav */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        .logo-icon { color: #00c7b7; font-size: 18px; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo-subtitle { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+
+        .nav-links { display: flex; gap: 30px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+        /* 2. Hero Section */
+        .hero { padding: 80px 0; text-align: left; }
+        .hero-status { display: flex; align-items: center; gap: 10px; color: #00c7b7; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;}
+        .status-dot { height: 8px; width: 8px; background-color: #00c7b7; border-radius: 50%; display: inline-block; }
+        
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            max-width: 700px;
+        }
+        
+        .title-highlight { color: #00c7b7; } /* Teal highlight */
+        
+        .hero-description {
+            font-size: 16px;
+            color: #888;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* 3. "Choose your battlefield" / Category Section */
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .track-count { text-transform: uppercase; letter-spacing: 1px; }
+
+        /* The Grid of Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2px; /* Thin lines between cards */
+            background-color: #1a1a1a; /* Color of the lines */
+            border: 1px solid #1a1a1a;
+        }
+
+        .card {
+            background-color: #0f0f0f; /* Slightly lighter than body */
+            padding: 40px;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .card:hover { background-color: #141414; }
+
+        /* Card internal elements */
+        .card-icon {
+            width: 32px; height: 32px;
+            /* This is where you'd put channel logos. Using colored squares for now */
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .card-top { display: flex; justify-content: space-between; align-items: start; }
+        .external-link { color: #666; font-size: 12px; }
+        .card:hover .external-link { color: #00c7b7; }
+
+        .card-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #555; margin-bottom: 10px; }
+        .card-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px; }
+        .card-description { font-size: 14px; color: #888; }
+
+        /* Specific styles for the "active" highlighted card */
+        .card.active-card { border: 1px solid #00c7b7; box-shadow: 0 0 15px rgba(0, 199, 183, 0.1); }
+        .card.active-card .card-title { color: #00c7b7; }
+
+        /* 4. Footer */
+        footer { text-align: center; padding: 60px 0; font-size: 12px; color: #444; border-top: 1px solid #1a1a1a; margin-top: 80px;}
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 36px; }
+            .nav-links { gap: 15px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">
+                <span class="logo-icon">&gt;_</span>
+                <span class="logo-text">
+                    AI.Channels
+                    <span class="logo-subtitle">AI.GUIDE.TERMINAL</span>
+                </span>
+            </a>
+            <nav class="nav-links">
+                <a href="#" class="active">Index</a>
+                <a href="#">Categories</a>
+                <a href="#">Submit</a>
+                <a href="#">About</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-status">
+                <span class="status-dot"></span> LIVE . AI CHANNELS ONLINE
+            </div>
+            <h1 class="hero-title">
+                Paste the channel link. <span class="title-highlight">Get the fix.</span>
+            </h1>
+            <p class="hero-description">
+                A curated index of the best AI YouTube mentors across LLMS, AI Coding, Reasoning, AI Art, and Productivity.
+            </p>
+        </section>
+
+        <section class="categories">
+            <div class="category-header">
+                <span>CATEGORIES</span>
+                <span class="track-count">14 CHANNELS</span>
+            </div>
+
+            <div class="grid">
+                
+                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card active-card">
+                    <div class="card-top">
+                        <div class="card-icon" style="background-color: #15538e; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
+                        <span class="external-link">&#x2197;</span>
+                    </div>
+                    <div class="card-meta">CATEGORY / AI CODING</div>
+                    <h2 class="card-title">Andrej Karpathy</h2>
+                    <p class="card-description">Foundational deep dives into LLMs, PyTorch, and neural networks from the source.</p>
+                </a>
+
+                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
+                    <div class="card-top">
+                        <div class="card-icon" style="background-color: #8a5fd2; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
+                        <span class="external-link">&#x2197;</span>
+                    </div>
+                    <div class="card-meta">CATEGORY / AI RESEARCH</div>
+                    <h2 class="card-title">The AI Epiphany</h2>
+                    <p class="card-description">Detailed code walkthroughs of implementing state-of-the-art papers (LLMs, RAG). </p>
+                </a>
+
+                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
+                    <div class="card-top">
+                        <div class="card-icon" style="background-color: #6082d2; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
+                        <span class="external-link">&#x2197;</span>
+                    </div>
+                    <div class="card-meta">CATEGORY / AI AGENTS</div>
+                    <h2 class="card-title">Matt Wolfe</h2>
+                    <p class="card-description">High-level weekly updates on the explosion of new AI tools, agents, and software.</p>
+                </a>
+
+                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
+                    <div class="card-top">
+                        <div class="card-icon" style="background-color: #5fd2a5; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
+                        <span class="external-link">&#x2197;</span>
+                    </div>
+                    <div class="card-meta">CATEGORY / PRODUCTIVITY</div>
+                    <h2 class="card-title">Cody Musser</h2>
+                    <p class="card-description">Practical tutorials on using AI for business automation and personal workflow.</p>
+                </a>
+
+                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
+                    <div class="card-top">
+                        <div class="card-icon" style="background-color: #9b5fd2; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
+                        <span class="external-link">&#x2197;</span>
+                    </div>
+                    <div class="card-meta">CATEGORY / GENERATIVE ART</div>
+                    <h2 class="card-title">PromptJuntion</h2>
+                    <p class="card-description">Tutorials on Midjourney techniques, video generation prompts, and AI style transfer.</p>
+                </a>
+
+                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
+                    <div class="card-top">
+                        <div class="card-icon" style="background-color: #cc6666; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
+                        <span class="external-link">&#x2197;</span>
+                    </div>
+                    <div class="card-meta">CATEGORY / ML THEORY</div>
+                    <h2 class="card-title">StatQuest with Josh Starmer</h2>
+                    <p class="card-description">Making complex machine learning and statistics concepts easy to understand. </p>
+                </a>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>AI Terminal v1.0. | Built with GitHub Pages. Powered by open-source curiosity.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
