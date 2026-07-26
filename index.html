@@ -96,9 +96,15 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; background-color: #003311; border: 1px solid #003311; margin-bottom: 60px; }
         .card { background-color: #030d05; padding: 30px; position: relative; transition: all 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
         .card:hover { background-color: #061a0b; border-left: 3px solid #00ff66; }
+        
         .card-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px; }
-        .external-link { color: #006622; font-size: 12px; }
-        .card:hover .external-link { color: #00ff66; }
+        
+        /* Fixed external-link styles so it behaves like a real clickable link button */
+        .external-link { 
+            background: #00220a; border: 1px solid #005522; color: #00cc52; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; transition: all 0.2s;
+        }
+        .external-link:hover { background: #00ff66; color: #030a03; border-color: #00ff66; box-shadow: 0 0 8px #00ff66; }
+        
         .card-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #008833; margin-bottom: 8px; }
         .card-title { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
         .card-description { font-size: 13px; color: #00aa44; }
@@ -178,7 +184,10 @@
                 
                 <div class="card" data-keywords="postgresql database sql tuning replication postgres" onclick="openTutorial('PostgreSQL Architecture & Tuning', ['Configure connection pooling via pgBouncer to handle concurrent client requests.', 'Optimize slow queries using <code>EXPLAIN ANALYZE</code>.', 'Set up streaming replication by configuring <code>wal_level = replica</code> in postgresql.conf.', 'Automate daily backups using <code>pg_dump</code> scripts.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">DATABASE / SQL</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">DATABASE / SQL</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">PostgreSQL</h2>
                         <p class="card-description">Deep-dive configurations, connection pooling, high-availability clusters, and query optimization.</p>
                     </div>
@@ -187,7 +196,10 @@
 
                 <div class="card" data-keywords="redis cache memory nosql datastore" onclick="openTutorial('Redis In-Memory Caching & Pub/Sub', ['Install Redis server and bind configuration to local network interfaces.', 'Configure memory eviction policies (e.g., <code>allkeys-lru</code>) to prevent crashes.', 'Implement session caching layers using Redis keys with TTL limits.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">DATABASE / CACHE</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">DATABASE / CACHE</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">Redis</h2>
                         <p class="card-description">In-memory data structures, pub/sub messaging patterns, and low-latency cluster caching.</p>
                     </div>
@@ -196,7 +208,10 @@
 
                 <div class="card" data-keywords="mysql database relational innodb storage" onclick="openTutorial('MySQL InnoDB Tuning & Replication', ['Tune InnoDB buffer pool size to roughly 70-80% of server RAM.', 'Establish master-replica replication channels to offload heavy read traffic.', 'Execute routine index maintenance and monitor slow query logs.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">DATABASE / SQL</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">DATABASE / SQL</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">MySQL</h2>
                         <p class="card-description">InnoDB engine optimizations, master-replica setups, and schema migration workflows.</p>
                     </div>
@@ -205,7 +220,10 @@
 
                 <div class="card" data-keywords="aws amazon web services ec2 s3 lambda vpc cloud" onclick="openTutorial('AWS Core Infrastructure Deployment', ['Design secure multi-AZ VPCs with public/private subnets and NAT gateways.', 'Provision EC2 application instances or container workloads on Amazon EKS.', 'Manage secure access permissions using granular IAM roles and security groups.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">CLOUD / INFRASTRUCTURE</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">CLOUD / INFRASTRUCTURE</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">Amazon Web Services (AWS)</h2>
                         <p class="card-description">Core architecture across EC2, S3, IAM, Lambda, VPC, and EKS with automated provisioning.</p>
                     </div>
@@ -214,7 +232,10 @@
 
                 <div class="card" data-keywords="azure microsoft cloud vms aks storage entra id" onclick="openTutorial('Microsoft Azure Cloud Architecture', ['Configure Azure Resource Groups and Virtual Networks with customized subnets.', 'Deploy and manage Azure Kubernetes Service (AKS) clusters.', 'Secure enterprise environments using Microsoft Entra ID and RBAC roles.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">CLOUD / INFRASTRUCTURE</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">CLOUD / INFRASTRUCTURE</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">Microsoft Azure</h2>
                         <p class="card-description">Enterprise cloud setups covering Virtual Machines, AKS clusters, storage, and Entra ID.</p>
                     </div>
@@ -223,7 +244,10 @@
 
                 <div class="card" data-keywords="gcp google cloud platform compute gke iam run" onclick="openTutorial('Google Cloud Platform (GCP) Deployment', ['Initialize GCP projects and configure Virtual Private Cloud networks.', 'Deploy serverless applications rapidly using Google Cloud Run services.', 'Manage container deployments with Google Kubernetes Engine (GKE).'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">CLOUD / INFRASTRUCTURE</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">CLOUD / INFRASTRUCTURE</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">Google Cloud Platform (GCP)</h2>
                         <p class="card-description">Global network deployments, GKE, Cloud Run services, and fine-grained IAM governance.</p>
                     </div>
@@ -232,7 +256,10 @@
 
                 <div class="card" data-keywords="aws devops pipelines codebuild codepipeline terraform automation" onclick="openTutorial('AWS DevOps CI/CD Automation Pipelines', ['Write Infrastructure-as-Code using Terraform templates.', 'Configure source version control repositories.', 'Build automated compilation scripts using AWS CodeBuild and CodePipeline.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">DEVOPS / AWS</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">DEVOPS / AWS</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">AWS DevOps Pipelines</h2>
                         <p class="card-description">Automated build and release workflows using CodeBuild, CodePipeline, and Terraform.</p>
                     </div>
@@ -241,7 +268,10 @@
 
                 <div class="card" data-keywords="azure devops pipelines yaml boards repos artifacts" onclick="openTutorial('Azure DevOps YAML Pipelines & Boards', ['Set up Azure Repos and configure branching policies.', 'Create multi-stage <code>azure-pipelines.yml</code> files for build and deployment workflows.', 'Track project tasks and agile boards.'])">
                     <div>
-                        <div class="card-top"><div class="card-meta">DEVOPS / AZURE</div><span class="external-link">ACCESS ↗</span></div>
+                        <div class="card-top">
+                            <div class="card-meta">DEVOPS / AZURE</div>
+                            <a href="https://dev.to/sudlo2014" target="_blank" class="external-link" onclick="event.stopPropagation();">BLOG ↗</a>
+                        </div>
                         <h2 class="card-title">Azure DevOps</h2>
                         <p class="card-description">Multi-stage YAML deployment pipelines, artifact registries, and agile board tracking workflows.</p>
                     </div>
@@ -314,7 +344,7 @@
             }
 
             resultsPanel.style.display = 'block';
-            answerBody.innerHTML = `<p>Filtering matrix nodes matching query: "<strong>${input}</strong>"... Click any matching node below for the protocol guide.</p>`;
+            answerBody.innerHTML = `<p>Filtering matrix nodes matching query: "<strong>${input}</strong>"... Click the highlighted [BLOG ↗] buttons to open external tracks or click the card background for structural protocol execution steps.</p>`;
 
             for (let i = 0; i < cards.length; i++) {
                 let keywords = cards[i].getAttribute('data-keywords');
