@@ -3,34 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI.Terminal | DevOps.AI.Guide</title>
+    <title>Sudlo2026 | Cloud, Databases & DevOps Knowledge Base</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Reset & Base Styles */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background-color: #0a0a0a; /* Pure black background */
+            background-color: #0a0a0a;
             color: #e0e0e0;
-            font-family: 'JetBrains Mono', monospace; /* The terminal font */
+            font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
             font-size: 14px;
         }
 
         a { text-decoration: none; color: inherit; transition: color 0.2s; }
 
-        /* Layout Wrapper */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* 1. Header / Nav */
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -47,86 +45,127 @@
         .nav-links { display: flex; gap: 30px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
         .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-        /* 2. Hero Section */
-        .hero { padding: 80px 0; text-align: left; }
+        /* Hero Section */
+        .hero { padding: 60px 0 30px 0; }
         .hero-status { display: flex; align-items: center; gap: 10px; color: #00c7b7; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;}
         .status-dot { height: 8px; width: 8px; background-color: #00c7b7; border-radius: 50%; display: inline-block; }
         
         .hero-title {
-            font-size: 56px;
+            font-size: 44px;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 20px;
-            max-width: 700px;
+            max-width: 800px;
         }
-        
-        .title-highlight { color: #00c7b7; } /* Teal highlight */
+        .title-highlight { color: #00c7b7; }
         
         .hero-description {
-            font-size: 16px;
+            font-size: 15px;
             color: #888;
-            max-width: 600px;
-            margin-bottom: 40px;
+            max-width: 700px;
+            margin-bottom: 30px;
         }
 
-        /* 3. "Choose your battlefield" / Category Section */
+        /* Search & Agent Terminal Input Box */
+        .search-console {
+            background-color: #121212;
+            border: 1px solid #222;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+        .search-input-wrapper:focus-within { border-color: #00c7b7; }
+        .ai-prompt-symbol { color: #00c7b7; font-weight: bold; }
+        .search-box {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+        .search-hints {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .hint-pill {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #aaa;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .hint-pill:hover { border-color: #00c7b7; color: #fff; }
+
+        /* Dynamic Agent Response Panel (Hidden by default until search matches an agent query) */
+        #agent-response-panel {
+            display: none;
+            background-color: #0f1717;
+            border: 1px solid #00c7b7;
+            padding: 24px;
+            border-radius: 6px;
+            margin-bottom: 40px;
+        }
+        .agent-header { color: #00c7b7; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .agent-body ol { margin-left: 20px; color: #ccc; margin-top: 10px; }
+        .agent-body li { margin-bottom: 8px; }
+
+        /* Grid Section */
         .category-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-size: 12px;
             color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .track-count { text-transform: uppercase; letter-spacing: 1px; }
-
-        /* The Grid of Cards */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2px; /* Thin lines between cards */
-            background-color: #1a1a1a; /* Color of the lines */
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2px;
+            background-color: #1a1a1a;
             border: 1px solid #1a1a1a;
+            margin-bottom: 60px;
         }
 
         .card {
-            background-color: #0f0f0f; /* Slightly lighter than body */
-            padding: 40px;
+            background-color: #0f0f0f;
+            padding: 30px;
             position: relative;
             transition: background-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover { background-color: #141414; }
-
-        /* Card internal elements */
-        .card-icon {
-            width: 32px; height: 32px;
-            /* This is where you'd put channel logos. Using colored squares for now */
-            border-radius: 4px;
-            margin-bottom: 30px;
-        }
-
-        .card-top { display: flex; justify-content: space-between; align-items: start; }
+        .card-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px; }
         .external-link { color: #666; font-size: 12px; }
         .card:hover .external-link { color: #00c7b7; }
+        
+        .card-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #555; margin-bottom: 8px; }
+        .card-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .card-description { font-size: 13px; color: #888; }
 
-        .card-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #555; margin-bottom: 10px; }
-        .card-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px; }
-        .card-description { font-size: 14px; color: #888; }
-
-        /* Specific styles for the "active" highlighted card */
-        .card.active-card { border: 1px solid #00c7b7; box-shadow: 0 0 15px rgba(0, 199, 183, 0.1); }
-        .card.active-card .card-title { color: #00c7b7; }
-
-        /* 4. Footer */
-        footer { text-align: center; padding: 60px 0; font-size: 12px; color: #444; border-top: 1px solid #1a1a1a; margin-top: 80px;}
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 36px; }
-            .nav-links { gap: 15px; font-size: 11px; }
-        }
+        footer { text-align: center; padding: 40px 0; font-size: 12px; color: #444; border-top: 1px solid #1a1a1a; }
     </style>
 </head>
 <body>
@@ -134,108 +173,205 @@
     <div class="container">
         <header>
             <a href="#" class="logo">
-                <span class="logo-icon">&gt;_</span>
+                <span class="logo-icon">>_</span>
                 <span class="logo-text">
-                    AI.Channels
-                    <span class="logo-subtitle">AI.GUIDE.TERMINAL</span>
+                    Sudlo2026.Index
+                    <span class="logo-subtitle">Cloud & DevOps Knowledge Base</span>
                 </span>
             </a>
             <nav class="nav-links">
-                <a href="#" class="active">Index</a>
-                <a href="#">Categories</a>
-                <a href="#">Submit</a>
-                <a href="#">About</a>
+                <a href="https://dev.to/sudlo2014" target="_blank">Dev.to Blog ↗</a>
+                <a href="#stacks">Stacks</a>
+                <a href="#search">Search</a>
             </nav>
         </header>
 
         <section class="hero">
             <div class="hero-status">
-                <span class="status-dot"></span> LIVE . AI CHANNELS ONLINE
+                <span class="status-dot"></span> LIVE . REASONING ENGINE ONLINE
             </div>
             <h1 class="hero-title">
-                Paste the channel link. <span class="title-highlight">Get the fix.</span>
+                Search databases, clouds & DevOps. <span class="title-highlight">Get step-by-step guides.</span>
             </h1>
             <p class="hero-description">
-                A curated index of the best AI YouTube mentors across LLMS, AI Coding, Reasoning, AI Art, and Productivity.
+                A centralized technical index mapping architectures across PostgreSQL, Redis, MySQL, AWS, Azure, GCP, and automation pipelines.
             </p>
-        </section>
 
-        <section class="categories">
-            <div class="category-header">
-                <span>CATEGORIES</span>
-                <span class="track-count">14 CHANNELS</span>
+            <div class="search-console" id="search">
+                <div class="search-input-wrapper">
+                    <span class="ai-prompt-symbol">AI></span>
+                    <input type="text" id="searchInput" class="search-box" placeholder="Search database tuning, Kubernetes, AWS migration, or type 'create an agent'..." onkeyup="filterCards()">
+                </div>
+                <div class="search-hints">
+                    <span style="font-size:11px; color:#555; align-self:center;">Try searching:</span>
+                    <span class="hint-pill" onclick="quickSearch('postgresql')">PostgreSQL</span>
+                    <span class="hint-pill" onclick="quickSearch('redis')">Redis Caching</span>
+                    <span class="hint-pill" onclick="quickSearch('aws')">AWS Architecture</span>
+                    <span class="hint-pill" onclick="quickSearch('create an agent')">🤖 Create an Agent</span>
+                    <span class="hint-pill" onclick="quickSearch('devops')">Azure/AWS DevOps</span>
+                </div>
             </div>
 
-            <div class="grid">
+            <div id="agent-response-panel">
+                <div class="agent-header">
+                    <span>⚡ AGENT REASONING OUTPUT: LOCAL AGENT WORKFLOW</span>
+                    <span style="cursor:pointer; color:#888;" onclick="closeAgentPanel()">[✕]</span>
+                </div>
+                <div class="agent-body">
+                    <p style="color:#e0e0e0; font-size:13px;">Here is your step-by-step framework to build and run an automated agent locally:</p>
+                    <ol>
+                        <li><strong>Initialize Environment:</strong> Set up a clean Python workspace using Git Bash on Windows.</li>
+                        <li><strong>Install Dependencies:</strong> Run <code style="color:#00c7b7;">pip install langchain openai chromadb</code> to build the reasoning loop.</li>
+                        <li><strong>Configure Local Models:</strong> Connect your execution controller script to local or cloud LLM endpoints via environment variables.</li>
+                        <li><strong>Deploy Automation:</strong> Wrap your execution steps in structured modular tools for continuous pipeline automation.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="stacks" id="stacks">
+            <div class="category-header">
+                <span>INDEXED TOPICS & KNOWLEDGE MODULES</span>
+                <span id="cardCount">8 Tracks</span>
+            </div>
+
+            <div class="grid" id="cardsGrid">
                 
-                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card active-card">
-                    <div class="card-top">
-                        <div class="card-icon" style="background-color: #15538e; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
-                        <span class="external-link">&#x2197;</span>
+                <div class="card" data-keywords="postgresql database sql tuning replication postgres">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">DATABASE / SQL</div>
+                            <span class="external-link">DB</span>
+                        </div>
+                        <h2 class="card-title">PostgreSQL</h2>
+                        <p class="card-description">Deep-dive configurations, connection pooling, high-availability clusters, query optimization, and indexing strategies.</p>
                     </div>
-                    <div class="card-meta">CATEGORY / AI CODING</div>
-                    <h2 class="card-title">Andrej Karpathy</h2>
-                    <p class="card-description">Foundational deep dives into LLMs, PyTorch, and neural networks from the source.</p>
-                </a>
+                </div>
 
-                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
-                    <div class="card-top">
-                        <div class="card-icon" style="background-color: #8a5fd2; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
-                        <span class="external-link">&#x2197;</span>
+                <div class="card" data-keywords="redis cache memory nosql datastore">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">DATABASE / CACHE</div>
+                            <span class="external-link">MEM</span>
+                        </div>
+                        <h2 class="card-title">Redis</h2>
+                        <p class="card-description">In-memory data structures, pub/sub messaging patterns, persistence configuration, and low-latency cluster caching.</p>
                     </div>
-                    <div class="card-meta">CATEGORY / AI RESEARCH</div>
-                    <h2 class="card-title">The AI Epiphany</h2>
-                    <p class="card-description">Detailed code walkthroughs of implementing state-of-the-art papers (LLMs, RAG). </p>
-                </a>
+                </div>
 
-                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
-                    <div class="card-top">
-                        <div class="card-icon" style="background-color: #6082d2; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
-                        <span class="external-link">&#x2197;</span>
+                <div class="card" data-keywords="mysql database relational innodb storage">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">DATABASE / SQL</div>
+                            <span class="external-link">DB</span>
+                        </div>
+                        <h2 class="card-title">MySQL</h2>
+                        <p class="card-description">InnoDB engine optimizations, master-replica replication setups, schema migrations, and backup execution workflows.</p>
                     </div>
-                    <div class="card-meta">CATEGORY / AI AGENTS</div>
-                    <h2 class="card-title">Matt Wolfe</h2>
-                    <p class="card-description">High-level weekly updates on the explosion of new AI tools, agents, and software.</p>
-                </a>
+                </div>
 
-                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
-                    <div class="card-top">
-                        <div class="card-icon" style="background-color: #5fd2a5; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
-                        <span class="external-link">&#x2197;</span>
+                <div class="card" data-keywords="aws amazon web services ec2 s3 lambda vpc cloud">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">CLOUD / INFRASTRUCTURE</div>
+                            <span class="external-link">AWS</span>
+                        </div>
+                        <h2 class="card-title">Amazon Web Services (AWS)</h2>
+                        <p class="card-description">Core architecture across EC2, S3, IAM, Lambda, VPC, and EKS with automated infrastructure provisioning.</p>
                     </div>
-                    <div class="card-meta">CATEGORY / PRODUCTIVITY</div>
-                    <h2 class="card-title">Cody Musser</h2>
-                    <p class="card-description">Practical tutorials on using AI for business automation and personal workflow.</p>
-                </a>
+                </div>
 
-                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
-                    <div class="card-top">
-                        <div class="card-icon" style="background-color: #9b5fd2; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
-                        <span class="external-link">&#x2197;</span>
+                <div class="card" data-keywords="azure microsoft cloud vms aks storage entra id">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">CLOUD / INFRASTRUCTURE</div>
+                            <span class="external-link">AZ</span>
+                        </div>
+                        <h2 class="card-title">Microsoft Azure</h2>
+                        <p class="card-description">Enterprise cloud setups covering Virtual Machines, AKS clusters, blob storage, networking, and Entra ID integration.</p>
                     </div>
-                    <div class="card-meta">CATEGORY / GENERATIVE ART</div>
-                    <h2 class="card-title">PromptJuntion</h2>
-                    <p class="card-description">Tutorials on Midjourney techniques, video generation prompts, and AI style transfer.</p>
-                </a>
+                </div>
 
-                <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" class="card">
-                    <div class="card-top">
-                        <div class="card-icon" style="background-color: #cc6666; background-image: url('https://logo.clearbit.com/youtube.com?size=64'); background-size: cover;"></div>
-                        <span class="external-link">&#x2197;</span>
+                <div class="card" data-keywords="gcp google cloud platform compute gke iam run">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">CLOUD / INFRASTRUCTURE</div>
+                            <span class="external-link">GCP</span>
+                        </div>
+                        <h2 class="card-title">Google Cloud Platform (GCP)</h2>
+                        <p class="card-description">Global network deployments, Google Kubernetes Engine (GKE), Cloud Run services, and fine-grained IAM governance.</p>
                     </div>
-                    <div class="card-meta">CATEGORY / ML THEORY</div>
-                    <h2 class="card-title">StatQuest with Josh Starmer</h2>
-                    <p class="card-description">Making complex machine learning and statistics concepts easy to understand. </p>
-                </a>
+                </div>
+
+                <div class="card" data-keywords="aws devops pipelines codebuild codepipeline terraform automation">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">DEVOPS / AWS</div>
+                            <span class="external-link">CI/CD</span>
+                        </div>
+                        <h2 class="card-title">AWS DevOps Pipelines</h2>
+                        <p class="card-description">Automated build and release workflows using CodeBuild, CodePipeline, Terraform infrastructure-as-code, and container registries.</p>
+                    </div>
+                </div>
+
+                <div class="card" data-keywords="azure devops pipelines yaml boards repos artifacts">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-meta">DEVOPS / AZURE</div>
+                            <span class="external-link">CI/CD</span>
+                        </div>
+                        <h2 class="card-title">Azure DevOps</h2>
+                        <p class="card-description">Multi-stage YAML deployment pipelines, artifact registries, git repository management, and agile board tracking workflows.</p>
+                    </div>
+                </div>
 
             </div>
         </section>
 
         <footer>
-            <p>AI Terminal v1.0. | Built with GitHub Pages. Powered by open-source curiosity.</p>
+            <p>Knowledge Base synced with <a href="https://dev.to/sudlo2014" target="_blank" style="color:#00c7b7;">dev.to/sudlo2014</a> | Built on GitHub Pages.</p>
         </footer>
 
     </div>
 
+    <script>
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            let agentPanel = document.getElementById('agent-response-panel');
+            let matchCount = 0;
+
+            // Trigger agent workflow view if query matches agent intent
+            if (input.includes('agent') || input.includes('create an agent')) {
+                agentPanel.style.display = 'block';
+            } else {
+                agentPanel.style.display = 'none';
+            }
+
+            // Filter index cards
+            for (let i = 0; i < cards.length; i++) {
+                let keywords = cards[i].getAttribute('data-keywords');
+                let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
+                let desc = cards[i].querySelector('.card-description').innerText.toLowerCase();
+
+                if (keywords.includes(input) || title.includes(input) || desc.includes(input) || input === '') {
+                    cards[i].style.display = "flex";
+                    matchCount++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+            document.getElementById('cardCount').innerText = matchCount + " Tracks Visible";
+        }
+
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            filterCards();
+        }
+
+        function closeAgentPanel() {
+            document.getElementById('agent-response-panel').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
