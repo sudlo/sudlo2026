@@ -1,0 +1,15 @@
+/* Simple styles for the full knowledge base */
+:root{--bg:#0b1220;--card:#0f1724;--text:#e6eef3;--muted:#94a3b8;--accent:#60a5fa}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto;color:var(--text);background:linear-gradient(180deg,#061025 0%,#071426 100%);padding:24px}
+.container{max-width:1100px;margin:0 auto}
+.header{display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:1.6rem}
+.search{margin:16px 0}
+.search input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:var(--card);color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:var(--card);padding:12px;border-radius:8px;border:1px solid rgba(96,165,250,0.06)}
+.card h3{margin:0 0 6px}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071228;padding:18px;border-radius:10px;max-width:760px;width:90%;display:none}
+.modal.active{display:block}
+.code{background:#021021;padding:10px;border-radius:6px;color:#7dd3fc;font-family:monospace}
